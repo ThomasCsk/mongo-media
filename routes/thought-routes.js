@@ -22,10 +22,19 @@ router
   .put(updateThought)
   .delete(deleteThought);
 
-// /thoughts/<thoughtId>/<reactionId>
+// /thoughts/<userId>/<thoughtId>
 router
-  .route('/:thoughtId/:reactionId')
-  .put(createReaction)
-  .delete(deleteReaction);
+.route('/:userId/:thoughtId')
+.delete(deleteThought);
 
+
+// /thoughts/<thoughtId>/reactions
+router
+  .route('/:thoughtId/reactions')
+  .post(createReaction)
+
+// /thoughts/<thoughtId>/reactions/<reactionId>
+router
+  .route('/:thoughtId/reactions/:reactionId')
+  .delete(deleteReaction);
 module.exports = router;

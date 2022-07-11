@@ -1,6 +1,7 @@
 const { Thought, User } = require('../models');
 
 const thoughtController = {
+
   getAllThought(req,res){
     Thought.find({})
     .select('-__v')
@@ -8,18 +9,24 @@ const thoughtController = {
     .then(dbThoughtData => res.json(dbThoughtData))
     .catch(err => res.status(500).json(err));
   },
+
   getThoughtById({ params },res){
     Thought.findOne({ _id: params.id})
+    .populate({
+      path: 'reactions',
+      select: '-__v'
+    })
     .select('-__v')
     .sort({ _id: -1 })
     .then(dbThoughtData => res.json(dbThoughtData))
     .catch(err => res.status(500).json(err));
   },
-  createThought({ params, body }, res) {
+
+  createThought({ body }, res) {
     Thought.create(body)
     .then(({ _id }) => {
       return User.findOneAndUpdate(
-        { _id: params.userId },
+        { _id: body.userId },
         { $push: { thoughts: _id } },
         { new: true }
       );
@@ -33,6 +40,7 @@ const thoughtController = {
     })
     .catch(err => res.status(500).json(err));
   },
+
   createReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
@@ -48,6 +56,7 @@ const thoughtController = {
       })
       .catch(err => res.status(500).json(err));
   },
+
   updateThought({params,body},res){
     Thought.findOneAndUpdate({_id:params.id}, body, {new:true, runValidators:true})
     .then(dbThoughtData => {
@@ -59,6 +68,7 @@ const thoughtController = {
     })
     .catch(err => res.status(500).json(err));
   },
+
   deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.thoughtId })
       .then(deletedThought => {
@@ -80,6 +90,7 @@ const thoughtController = {
       })
       .catch(err => res.status(500).json(err));
   },
+
   deleteReaction({ params }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
@@ -89,6 +100,7 @@ const thoughtController = {
       .then(dbReactionData => res.json(dbReactionData))
       .catch(err => res.status(500).json(err));
   }
+
 };
 
 module.exports = thoughtController;
