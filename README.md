@@ -27,7 +27,14 @@ To install this project, you can either clone the repository down to your own co
 ## Usage
   
 Here is a series of walkthrough videos showing exactly how to use this project.
-  
+
+
+**Link to video 1:**[https://drive.google.com/file/d/1BmhpXXwcL1670MQexDTXVlpfDVEW0EjE/view](https://drive.google.com/file/d/1BmhpXXwcL1670MQexDTXVlpfDVEW0EjE/view)
+
+
+**Link to video 1:**[https://drive.google.com/file/d/1eYch1nUeqEbr1ievJHRwuxLoHDOQOG1D/view](https://drive.google.com/file/d/1eYch1nUeqEbr1ievJHRwuxLoHDOQOG1D/view)
+
+
 ## License
 
 This project is current operating under the following license:
